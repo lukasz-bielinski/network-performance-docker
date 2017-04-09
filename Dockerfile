@@ -2,7 +2,7 @@ FROM oberthur/docker-ubuntu:16.04
 MAINTAINER Lukasz Bielinski <l.bielinski@oberthur.com>
 
 # Prepare image
-RUN apt-get update && \
+RUN apt-get update  \
     && apt-get upgrade  \
     && apt-get install iperf3 curl gcc make \
     && apt-get clean autoclean \
