@@ -1,0 +1,67 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: vip-10-122-16-180
+  labels:
+    app-name: vip-10-122-16-180
+
+spec:
+  template:
+    metadata:
+      labels:
+        name: vip-10-122-16-180
+
+    spec:
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+
+      containers:
+        - name: keepalived-vip
+          image: oberthur/docker-keepalived:20160917
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          resources:
+            requests:
+              cpu: 30m
+              memory: 32Mi
+            limits:
+              cpu: 1
+              memory: 48Mi
+          env:
+            - name: VIP
+              value: "10.122.16.180"
+            - name: MASK
+              value: "32"
+            - name: VROUTERID
+              value: "180"
+            - name: STATE
+              value: "MASTER"
+            - name: INTERFACE
+              value: "eth0"
+            - name: PRIORITY
+              value: "100"
+            - name: ADVERT
+              value: "5"
+            - name: AUTHPASS
+              value: sdovn12434slwnwd
+          volumeMounts:
+          - mountPath: /sys
+            name: sys
+          - mountPath: /sbin/modprobe
+            name: modprobe
+          - mountPath: /lib/modules
+            name: modules
+
+      volumes:
+      - name: sys
+        hostPath:
+            path: /sys
+      - name: modprobe
+        hostPath:
+            path: /sbin/modprobe
+      - name: modules
+        hostPath:
+            path: /lib/modules
