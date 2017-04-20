@@ -4,9 +4,8 @@ metadata:
   labels:
     run: iperf-client
   name: iperf-client
-  namespace: network-performance
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       run: iperf-client
