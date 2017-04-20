@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    run: iperf
+  name: iperf
+  namespace: network-performance
+spec:
+  ports:
+  - name: p5201
+    protocol: TCP
+    port: 5201
+    targetPort: 5201
+  - name: p12865
+    protocol: TCP
+    port: 12865
+    targetPort: 12865
+  selector:
+    run: iperf
+
+
+  externalIPs:
+    - "192.168.1.130"
+#
