@@ -47,7 +47,7 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
       terminationGracePeriodSeconds: 1
-          
+
 
 ---
 
@@ -61,7 +61,7 @@ metadata:
   namespace: default
 spec:
   externalIPs:
-  - 10.122.16.180
+  - 172.16.239.71
   ports:
   - port: 80
     protocol: TCP
