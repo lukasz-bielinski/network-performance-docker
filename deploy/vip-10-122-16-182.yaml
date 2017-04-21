@@ -28,7 +28,7 @@ spec:
                       }
                     ]
                   },
-                  "topologyKey": "tor"
+                  "topologyKey": "kubernetes.io/hostname"
                 }
               ]
              }
