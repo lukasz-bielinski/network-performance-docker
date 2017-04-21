@@ -24,6 +24,7 @@ spec:
                       {
                         "key": "run",
                         "operator": "In",
+                        "namespaces": ["default"],
                         "values": ["nginx-2"]
                       }
                     ]
