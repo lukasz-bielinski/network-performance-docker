@@ -1,0 +1,86 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vip
+  namespace: default
+spec:
+  replicas: 1
+  strategy:
+      rollingUpdate:
+        maxUnavailable: 0
+        maxSurge: 1
+  template:
+    metadata:
+      labels:
+        run: vip
+      annotations:
+        affinity:  >
+          {
+            "podAntiAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": [
+                {
+                  "labelSelector": {
+                    "matchExpressions": [
+                      {
+                        "key": "run",
+                        "operator": "In",
+                        "values": ["nginx-2"]
+                      }
+                    ]
+                  },
+                  "topologyKey": "tor"
+                }
+              ]
+             }
+          }
+    spec:
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      containers:
+      - name: keepalived-vip
+        image: oberthur/docker-keepalived:20160917
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+        resources:
+          requests:
+            cpu: 30m
+            memory: 32Mi
+          limits:
+            cpu: 1
+            memory: 48Mi
+        env:
+          - name: VIP
+            value: "172.16.239.72"
+          - name: MASK
+            value: "32"
+          - name: VROUTERID
+            value: "72"
+          - name: STATE
+            value: "MASTER"
+          - name: INTERFACE
+            value: "eth0"
+          - name: PRIORITY
+            value: "100"
+          - name: ADVERT
+            value: "5"
+          - name: AUTHPASS
+            value: sdovn12434slwnwd
+        volumeMounts:
+        - mountPath: /sys
+          name: sys
+        - mountPath: /sbin/modprobe
+          name: modprobe
+        - mountPath: /lib/modules
+          name: modules
+
+      volumes:
+      - name: sys
+        hostPath:
+            path: /sys
+      - name: modprobe
+        hostPath:
+            path: /sbin/modprobe
+      - name: modules
+        hostPath:
+            path: /lib/modules
