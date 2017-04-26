@@ -31,11 +31,11 @@ spec:
             memory: 48Mi
         env:
           - name: VIP
-            value: "172.16.239.72"
+            value: "10.122.16.182"
           - name: MASK
             value: "32"
           - name: VROUTERID
-            value: "72"
+            value: "182"
           - name: STATE
             value: "MASTER"
           - name: INTERFACE
