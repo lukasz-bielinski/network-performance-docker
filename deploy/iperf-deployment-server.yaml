@@ -2,13 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    run: iperf
-  name: iperf
+    run: iperf-server
+  name: iperf-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: iperf
+      run: iperf-server
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -17,13 +17,13 @@ spec:
   template:
     metadata:
       labels:
-        run: iperf
+        run: iperf-server
     spec:
       containers:
       - image: lukaszbielinski/network-performance-docker
         command: ["iperf3", "-s"]
         imagePullPolicy: Always
-        name: iperf
+        name: iperf-server
         ports:
         - containerPort: 5201
           protocol: TCP

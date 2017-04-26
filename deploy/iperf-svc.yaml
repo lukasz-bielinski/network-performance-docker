@@ -2,8 +2,8 @@ kind: Service
 apiVersion: v1
 metadata:
   labels:
-    run: iperf
-  name: iperf
+    run: iperf-server
+  name: iperf-server
 spec:
   ports:
   - name: p5201
@@ -15,4 +15,4 @@ spec:
     port: 12865
     targetPort: 12865
   selector:
-    run: iperf
+    run: iperf-server
