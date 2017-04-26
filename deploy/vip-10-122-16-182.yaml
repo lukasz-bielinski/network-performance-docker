@@ -13,16 +13,6 @@ spec:
     metadata:
       labels:
         run: vip
-      annotations:
-        affinity:
-            podAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-              - labelSelector:
-                  matchExpressions:
-                  - key: service
-                    operator: In
-                    values: [“S1”]
-                topologyKey: failure-domain.beta.kubernetes.io/zone
     spec:
       dnsPolicy: ClusterFirst
       hostNetwork: true
