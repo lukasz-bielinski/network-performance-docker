@@ -61,7 +61,7 @@ metadata:
   namespace: default
 spec:
   externalIPs:
-  - 172.16.239.72
+  - 10.122.16.182
   ports:
   - port: 80
     protocol: TCP
