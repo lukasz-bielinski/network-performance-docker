@@ -33,7 +33,7 @@ spec:
           - name: VIP
             value: "10.122.16.182"
           - name: MASK
-            value: "32"
+            value: "22"
           - name: VROUTERID
             value: "182"
           - name: STATE
