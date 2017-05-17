@@ -4,12 +4,13 @@ MAINTAINER Lukasz Bielinski <l.bielinski@oberthur.com>
 # Prepare image
 RUN apt-get update  \
     && apt-get upgrade -y  \
-    && apt-get install apache2-utils  iperf3 curl gcc make libc6-dev \
+    && apt-get install apache2-utils dnsperf  iperf3 curl gcc make libc6-dev \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 RUN curl -LO ftp://ftp.netperf.org/netperf/netperf-2.7.0.tar.gz && tar -xzf netperf-2.7.0.tar.gz
 RUN cd netperf-2.7.0 && ./configure --prefix=/usr && make && make install
+RUN mkdir /queries
 
 ENTRYPOINT ["iperf3"]
