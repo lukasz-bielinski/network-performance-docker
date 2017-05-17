@@ -4,7 +4,7 @@ MAINTAINER Lukasz Bielinski <l.bielinski@oberthur.com>
 # Prepare image
 RUN apt-get update  \
     && apt-get upgrade -y  \
-    && apt-get install apache2-utils dnsperf  iperf3 curl gcc make libc6-dev bind9utils libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev \
+    && apt-get install apache2-utils   iperf3 curl gcc make libc6-dev bind9utils libbind-dev libkrb5-dev libssl-dev libcap-dev libxml2-dev \
     && apt-get clean autoclean \
     && apt-get autoremove --yes \
     && rm -rf /var/lib/{apt,dpkg,cache,log}/
